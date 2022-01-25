@@ -23,6 +23,6 @@ class GeoLocator:
             url=self.IP_STACK_BASE_URL.format(self.ip_address, IP_STACK_ACCESS_KEY)
         )
         json_response = response.json()
-        if json_response.get('success'):
+        if not json_response.get('success'):
             raise IPStackConnectionError()
         return json_response
