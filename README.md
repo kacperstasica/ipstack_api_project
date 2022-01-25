@@ -1,4 +1,4 @@
-# Vehicles API
+# IPStack API
 
 ## Installation
 
