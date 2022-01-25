@@ -39,7 +39,6 @@ class GeolocationSerializer(serializers.ModelSerializer):
             instance.languages.add(*languages)
         return instance
 
-
     def create_geolocation(self, geolocation, ip_address):
         clean_geolocation = self.get_clean_dict(geolocation)
         instance = Geolocation.objects.create(

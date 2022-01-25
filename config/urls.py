@@ -18,6 +18,7 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('api/v1/', include('api')),
+    # set admin page as home page
+    path('', admin.site.urls),
 ]
