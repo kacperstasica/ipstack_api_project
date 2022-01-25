@@ -26,18 +26,19 @@ class GeolocationSerializer(serializers.ModelSerializer):
         geo_locator = GeoLocator(ip_address=ip_address)
         location, geolocation = geo_locator.data.pop('location', None), geo_locator.data
 
-        if location:
-            languages_to_be_created = location.get('languages')
-            languages = []
-            for language in languages_to_be_created:
-                clean_language = self.get_clean_dict(language)
-                obj, c = Language.objects.get_or_create(**clean_language)
-                languages.append(obj)
-            instance = self.create_geolocation(geolocation, ip_address)
-            if languages:
-                instance.languages.add(*languages)
-            return instance
-        return self.create_geolocation(geolocation, ip_address)
+        if not location:
+            return self.create_geolocation(geolocation, ip_address)
+        languages_to_be_created = location.get('languages')
+        languages = []
+        for language in languages_to_be_created:
+            clean_language = self.get_clean_dict(language)
+            obj, c = Language.objects.get_or_create(**clean_language)
+            languages.append(obj)
+        instance = self.create_geolocation(geolocation, ip_address)
+        if languages:
+            instance.languages.add(*languages)
+        return instance
+
 
     def create_geolocation(self, geolocation, ip_address):
         clean_geolocation = self.get_clean_dict(geolocation)
