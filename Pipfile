@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django-environ = "*"
+psycopg2-binary="==2.8.6"
+Django = "==3.2.*"
+django-rest-framework = "*"
+requests = "*"
+gunicorn="==20.1.0"
+djangorestframework-simplejwt = "*"
+
+[dev-packages]
+"flake8" = "*"
+factory_boy = "*"
+
+[requires]
+python_version = "3.8"
