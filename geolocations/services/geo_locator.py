@@ -1,5 +1,4 @@
 import requests
-from rest_framework import status
 
 from config.settings import IP_STACK_ACCESS_KEY
 from geolocations.exceptions import IPStackConnectionError
@@ -23,7 +22,7 @@ class GeoLocator:
         response = requests.get(
             url=self.IP_STACK_BASE_URL.format(self.ip_address, IP_STACK_ACCESS_KEY)
         )
-
-        if response.status_code != status.HTTP_200_OK:
+        json_response = response.json()
+        if json_response.get('success'):
             raise IPStackConnectionError()
-        return response.json()
+        return json_response
